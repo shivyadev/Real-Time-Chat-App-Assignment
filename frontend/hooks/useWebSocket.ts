@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { WebSocketMessage } from "../utils/types";
+import type { WebSocketMessage } from "../src/lib/types";
 
 export function useWebSocket(
   url: string,
