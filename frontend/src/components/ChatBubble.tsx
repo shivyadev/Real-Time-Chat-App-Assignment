@@ -14,7 +14,7 @@ function ChatBubble({ message, isCurrentUser }: ChatBubbleProps) {
         isCurrentUser ? "flex-row-reverse" : "flex-row"
       }`}
     >
-      <Avatar displayName={toUpper(message.username)} />
+      <Avatar displayName={message.username} />
 
       <div
         className={`flex flex-col max-w-xs lg:max-w-md ${
@@ -26,7 +26,7 @@ function ChatBubble({ message, isCurrentUser }: ChatBubbleProps) {
             isCurrentUser ? "text-right" : "text-left"
           }`}
         >
-          {message.username}
+          {toUpper(message.username)}
         </span>
 
         <div
