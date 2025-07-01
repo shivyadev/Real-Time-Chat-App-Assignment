@@ -4,6 +4,13 @@ A simple real-time chat application enabling users to communicate with each othe
 
 ---
 
+## Deployment Link
+
+- Client - https://chat-app-one-alpha-26.vercel.app
+- Server - https://chat-app-server-vpn5.onrender.com
+
+--
+
 ## 🚀 Features
 
 - ✅ Real-time communication between users.
@@ -53,7 +60,7 @@ git clone https://github.com/shivyadev/Real-Time-Chat-App-Assignment.git
 - Then run the below commands to install necessary dependencies.
 
 ```bash
-cd Real-Time-Chat-App-Assignment/frontend
+cd frontend
 npm install
 ```
 
@@ -67,7 +74,7 @@ npm install
 - Then run the below commands to install the necessary dependencies.
 
 ```bash
-cd ../backend
+cd backend
 npm install
 ```
 
@@ -76,5 +83,3 @@ npm install
 ```env
 MONGO_URL=your_mongodb_connection_string
 ```
-
-## Live App

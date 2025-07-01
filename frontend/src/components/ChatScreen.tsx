@@ -17,7 +17,6 @@ export default function ChatScreen() {
 
   // function to handle onmessage event of socket
   const handleMessage = useCallback((data: WebSocketMessage) => {
-    console.log(data.type);
     if (data.type === "history") {
       setMessages(data.messageInfo);
     } else if (data.type === "message") {
