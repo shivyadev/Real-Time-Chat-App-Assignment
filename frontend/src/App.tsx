@@ -1,12 +1,11 @@
-import WelcomeScreen from "../components/WelcomeScreen";
-import { UserContextProvider } from "../context/UserProvider";
+import { UserContextProvider } from "./context/UserProvider";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div className="w-screen h-screen">
       <UserContextProvider>
-        <WelcomeScreen />
-        {/* <ChatScreen /> */}
+        <Home />
       </UserContextProvider>
     </div>
   );
