@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ChatHistorySchema = mongoose.Schema({
   username: String,
   message: String,
-  timestamp: String,
+  timestamp: Date,
 });
 
 const ChatHistory = mongoose.model("ChatHistory", ChatHistorySchema);
