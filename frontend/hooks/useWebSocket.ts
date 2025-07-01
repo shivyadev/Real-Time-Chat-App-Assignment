@@ -13,20 +13,16 @@ export function useWebSocket(
     const socket = new WebSocket(url);
     socketRef.current = socket;
 
-    // event listner for successful server connection
     socket.onopen = () => {
       console.log("WebSocket Connected");
     };
 
     // event listner for receiving message
     socket.onmessage = (event) => {
-      console.log(event.data);
       const data = JSON.parse(event.data);
-      console.log(data);
       onMessage(data);
     };
 
-    // event listner for server disconnection
     socket.onclose = () => {
       console.log("WebSocket Disconnected");
     };

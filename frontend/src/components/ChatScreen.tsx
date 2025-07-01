@@ -48,7 +48,9 @@ export default function ChatScreen() {
               <ChatBubble
                 key={index}
                 message={message}
-                isCurrentUser={username === message.username}
+                isCurrentUser={
+                  username.toLowerCase() === message.username.toLowerCase()
+                }
               />
             ))}
             <div ref={messagesEndRef} />
