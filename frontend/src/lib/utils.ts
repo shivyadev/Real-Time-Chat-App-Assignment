@@ -30,3 +30,7 @@ export const getAvatarColor = (username: string) => {
   const index = username.length % colors.length;
   return colors[index];
 };
+
+export const toUpper = (username: string) => {
+  return username[0].toUpperCase() + username.slice(1);
+};
