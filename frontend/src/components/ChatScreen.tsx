@@ -30,7 +30,7 @@ export default function ChatScreen() {
   const socketRef = useWebSocket(serverUrl, handleMessage);
 
   return (
-    <div className="flex flex-col w-full max-w-4xl h-[600px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+    <div className="flex flex-col w-full max-w-4xl h-[600px] mx-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
       {/* Header */}
       <Header length={messages.length} />
 

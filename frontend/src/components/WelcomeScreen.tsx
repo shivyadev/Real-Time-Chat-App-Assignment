@@ -8,6 +8,11 @@ export default function WelcomeScreen() {
   const { setUsername } = useUserContext();
   const [nameInput, setNameInput] = useState<string>("");
 
+  const handleSubmit = (ev: React.FormEvent) => {
+    setUsername(nameInput);
+    ev.preventDefault();
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="w-full max-w-md space-y-8 text-center">
@@ -32,14 +37,14 @@ export default function WelcomeScreen() {
         </div>
 
         {/* Input Form */}
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Input
               type="text"
               value={nameInput}
               onChange={(ev) => setNameInput(ev.target.value)}
               placeholder="Enter your username..."
-              className="h-12 text-center text-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+              className="h-12 text-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 focus:placeholder-transparent"
             />
           </div>
 
@@ -47,11 +52,10 @@ export default function WelcomeScreen() {
             type="submit"
             className="w-full h-12 text-lg bg-blue-600 hover:bg-blue-700 hover:cursor-pointer"
             disabled={!nameInput.trim()}
-            onClick={() => setUsername(nameInput)}
           >
             Join Chat
           </Button>
-        </div>
+        </form>
 
         {/* Footer */}
         <p className="text-xs text-gray-400 mt-8">

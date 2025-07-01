@@ -1,5 +1,6 @@
 import type { Messages } from "@/lib/types";
 import Avatar from "./Avatar";
+import { toUpper } from "@/lib/utils";
 
 interface ChatBubbleProps {
   message: Messages;
@@ -13,7 +14,7 @@ function ChatBubble({ message, isCurrentUser }: ChatBubbleProps) {
         isCurrentUser ? "flex-row-reverse" : "flex-row"
       }`}
     >
-      <Avatar displayName={message.username} />
+      <Avatar displayName={toUpper(message.username)} />
 
       <div
         className={`flex flex-col max-w-xs lg:max-w-md ${
