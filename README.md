@@ -9,7 +9,7 @@ A simple real-time chat application enabling users to communicate with each othe
 - Client - https://chat-app-one-alpha-26.vercel.app
 - Server - https://chat-app-server-vpn5.onrender.com
 
---
+---
 
 ## 🚀 Features
 
