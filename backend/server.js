@@ -5,6 +5,7 @@ const connectDB = require("./db/connectDB");
 const ChatHistory = require("./models/ChatHistory");
 const convertTime = require("./utils");
 
+// WebSocket Server Setup
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
@@ -14,6 +15,7 @@ wss.on("connection", async (ws) => {
   console.log("Client connected");
   console.log("Total clients:", wss.clients.size);
 
+  // Fetching the previous chat history and sending them back to client
   const history = await ChatHistory.find()
     .sort({ timestamp: -1 })
     .limit(50)
@@ -34,6 +36,7 @@ wss.on("connection", async (ws) => {
 
     console.log("Received message:", message);
 
+    // Receiving the message sent from the client/frontend and broadcasting to all active client
     const messageToSend = {
       username: username,
       message: message,
@@ -64,6 +67,7 @@ wss.on("connection", async (ws) => {
   });
 });
 
+// Connecting with Database and starting the server
 connectDB();
 const PORT = process.env.PORT | 5000;
 server.listen(PORT, () => console.log("Server Running"));

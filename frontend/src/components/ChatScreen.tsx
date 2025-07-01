@@ -4,10 +4,10 @@ import type { WebSocketMessage, Messages } from "../lib/types";
 import { useUserContext } from "@/context/UserContext";
 import { toUpper } from "@/lib/utils";
 import ChatBubble from "./ChatBubble";
+import InputBar from "./InputBar";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState<Messages[]>([]);
-  const [input, setInput] = useState<string>("");
   const { username } = useUserContext();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -15,6 +15,7 @@ export default function ChatScreen() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // function to handle onmessage event of socket
   const handleMessage = useCallback((data: WebSocketMessage) => {
     console.log(data.type);
     if (data.type === "history") {
@@ -24,20 +25,9 @@ export default function ChatScreen() {
     }
   }, []);
 
+  // connecting with the web socket using the WebSocketHook
   const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
   const socketRef = useWebSocket(serverUrl, handleMessage);
-
-  // const sendMessage = () => {
-  //     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-  //       const messageInfo: Messages = {
-  //         username: username,
-  //         message: input,
-  //       };
-  //       socketRef.current.send(JSON.stringify(messageInfo));
-  //       console.log("Sent:", messageInfo);
-  //       setInput("");
-  //     }
-  //   };
 
   return (
     <div className="flex flex-col w-full max-w-4xl h-[600px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
@@ -70,6 +60,9 @@ export default function ChatScreen() {
           </div>
         )}
       </div>
+
+      {/* Input Section */}
+      <InputBar socketRef={socketRef} />
     </div>
   );
 }
