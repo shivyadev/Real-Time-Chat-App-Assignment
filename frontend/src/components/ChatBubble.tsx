@@ -32,7 +32,7 @@ function ChatBubble({ message, isCurrentUser }: ChatBubbleProps) {
           className={`relative px-4 py-2 rounded-2xl ${
             isCurrentUser
               ? "bg-blue-400 text-white rounded-br-md"
-              : "bg-gray-400 text-gray-200 rounded-bl-md"
+              : "bg-gray-300 text-gray-600 rounded-bl-md"
           }`}
         >
           <p className="text-sm leading-relaxed break-words ">
