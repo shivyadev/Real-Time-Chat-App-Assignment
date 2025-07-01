@@ -45,7 +45,7 @@ export default function WelcomeScreen() {
 
           <Button
             type="submit"
-            className="w-full h-12 text-lg bg-blue-600 hover:bg-blue-700"
+            className="w-full h-12 text-lg bg-blue-600 hover:bg-blue-700 hover:cursor-pointer"
             disabled={!nameInput.trim()}
             onClick={() => setUsername(nameInput)}
           >

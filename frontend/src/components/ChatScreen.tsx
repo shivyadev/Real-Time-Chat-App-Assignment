@@ -2,9 +2,9 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { useWebSocket } from "../../hooks/useWebSocket";
 import type { WebSocketMessage, Messages } from "../lib/types";
 import { useUserContext } from "@/context/UserContext";
-import { toUpper } from "@/lib/utils";
 import ChatBubble from "./ChatBubble";
 import InputBar from "./InputBar";
+import Header from "./Header";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState<Messages[]>([]);
@@ -32,12 +32,7 @@ export default function ChatScreen() {
   return (
     <div className="flex flex-col w-full max-w-4xl h-[600px] bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
       {/* Header */}
-      <div className="bg-gray-50 border-b border-gray-200 px-4 py-3">
-        <h2 className="text-lg font-semibold text-gray-900">Chat Room</h2>
-        <p className="text-sm text-gray-500">
-          {messages.length} messages | {toUpper(username)}
-        </p>
-      </div>
+      <Header length={messages.length} />
 
       {/* Message Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-1 bg-gray-50">

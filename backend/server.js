@@ -32,38 +32,48 @@ wss.on("connection", async (ws) => {
   );
 
   ws.on("message", async (data) => {
-    const { username, message } = JSON.parse(data);
+    try {
+      const { username, message } = JSON.parse(data);
+      console.log("Received message:", message);
 
-    console.log("Received message:", message);
+      // Receiving the message sent from the client/frontend and broadcasting to all active client
+      const messageToSend = {
+        username: username,
+        message: message,
+        timestamp: new Date(),
+      };
 
-    // Receiving the message sent from the client/frontend and broadcasting to all active client
-    const messageToSend = {
-      username: username,
-      message: message,
-      timestamp: new Date(),
-    };
+      const chat = new ChatHistory(messageToSend);
+      await chat.save();
 
-    const chat = new ChatHistory(messageToSend);
-    await chat.save();
-
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(
-          JSON.stringify({
-            type: "message",
-            messageInfo: {
-              ...messageToSend,
-              displayTime: convertTime(messageToSend.timestamp),
-            },
-          })
-        );
-      }
-    });
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(
+            JSON.stringify({
+              type: "message",
+              messageInfo: {
+                ...messageToSend,
+                displayTime: convertTime(messageToSend.timestamp),
+              },
+            })
+          );
+        }
+      });
+    } catch (err) {
+      console.error("Invalid Message", err.message);
+      ws.send(
+        JSON.stringify({ type: "error", message: "Invalid Message Format" })
+      );
+    }
   });
 
   ws.on("close", () => {
     console.log("Client disconnected");
     console.log("Remaining clients:", wss.clients.size);
+  });
+
+  ws.on("error", (err) => {
+    console.error("Websocket error:", err.message);
   });
 });
 

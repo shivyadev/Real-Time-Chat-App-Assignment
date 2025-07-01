@@ -25,6 +25,12 @@ function InputBar({ socketRef }: InputBarProps) {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      sendMessage();
+    }
+  };
+
   return (
     <div className="border-t border-gray-200 bg-white p-4">
       <div className="flex gap-2">
@@ -33,7 +39,8 @@ function InputBar({ socketRef }: InputBarProps) {
           value={input}
           onChange={(ev) => setInput(ev.target.value)}
           placeholder="Type your message..."
-          className="flex-1 h-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          className="flex-1 h-10 border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          onKeyDown={handleKeyDown}
         />
         <Button
           type="submit"
